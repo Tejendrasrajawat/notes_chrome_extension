@@ -1,14 +1,15 @@
-// check for data in background - if exist then send response to contentscript
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.action === "getCredentials") {
     chrome.storage.local.get(request.website, function (data) {
       const credentials = data[request.website];
+      console.log(credentials);
       if (credentials) {
-        sendResponse({ title: credentials.title, note: credentials.note });
+        sendResponse(credentials);
       } else {
-        sendResponse({ title: null, note: null });
+        sendResponse(credentials);
       }
     });
+    // Return true to indicate that the response will be sent asynchronously
+    return true;
   }
-  return true;
 });
