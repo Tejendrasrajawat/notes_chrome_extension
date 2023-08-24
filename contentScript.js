@@ -86,7 +86,7 @@ chrome.runtime.sendMessage(
 
       deleteButton.addEventListener("click", function () {
         // Remove the note from the response array
-        const updatedResponse = response.filter((item) => item.id !== id);
+        const updatedResponse = response.filter((item) => item.title !== title);
 
         // Update storage with the updated response
         chrome.runtime.sendMessage(
