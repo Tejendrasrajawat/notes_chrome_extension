@@ -1,0 +1,30 @@
+h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* savedData.css */
+#savedData {
+  width: 300px;
+}
+
+.entry {
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.remove-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ff0000;
+}
