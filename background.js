@@ -2,7 +2,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.action === "getCredentials") {
     chrome.storage.local.get(request.website, function (data) {
       const credentials = data[request.website];
-      console.log(credentials);
+
       if (credentials) {
         sendResponse(credentials);
       } else {
@@ -15,9 +15,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     chrome.storage.local.get(request.website, function (data) {
       const credentials = data[request.website];
       if (credentials) {
-        credentials.notes = request.notes;
         chrome.storage.local.set(
-          { [request.website]: credentials },
+          { [request.website]: request.notes },
           function () {
             sendResponse({ success: true });
           }

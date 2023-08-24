@@ -34,6 +34,7 @@ chrome.runtime.sendMessage(
     for (const entry of response) {
       let title = entry.title;
       let note = entry.note;
+      let id = entry.id;
       console.log(note, title);
 
       // Create and add content to the popup
@@ -82,11 +83,11 @@ chrome.runtime.sendMessage(
       deleteButton.style.color = "#dc3545";
       deleteButton.style.cursor = "pointer";
       deleteButton.style.fontSize = "14px";
+
       deleteButton.addEventListener("click", function () {
         // Remove the note from the response array
-        const updatedResponse = response.filter(
-          (item) => item.title !== title && item.note !== note
-        );
+        const updatedResponse = response.filter((item) => item.id !== id);
+
         // Update storage with the updated response
         chrome.runtime.sendMessage(
           {
@@ -100,6 +101,7 @@ chrome.runtime.sendMessage(
           }
         );
       });
+
       card.appendChild(deleteButton);
 
       popup.appendChild(closeIcon); // Add close icon to the popup
