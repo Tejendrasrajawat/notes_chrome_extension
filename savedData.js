@@ -8,36 +8,59 @@ chrome.storage.local.get(null, function (data) {
     if (data.hasOwnProperty(website)) {
       const notes = data[website];
       const websiteDiv = document.createElement("div");
-      websiteDiv.classList.add("website-entry"); // Add a class for styling
+      websiteDiv.classList.add("website-entry");
 
-      const websiteHeading = document.createElement("h3");
-      websiteHeading.textContent = website;
+      const websiteHeading = document.createElement("p");
+      websiteHeading.classList.add("website-title");
+      websiteHeading.textContent = website.toUpperCase();
 
       websiteDiv.appendChild(websiteHeading);
 
-      // Loop through notes for this website
       for (const note of notes) {
         const entryDiv = document.createElement("div");
-        entryDiv.classList.add("note-entry"); // Add a class for styling
+        entryDiv.classList.add("note-entry");
+
         const idParagraph = document.createElement("p");
-        idParagraph.textContent = "Title: " + note.title;
+        idParagraph.classList.add("entry-title");
+        idParagraph.textContent = note.title;
 
         entryDiv.appendChild(idParagraph);
 
         const passwordParagraph = document.createElement("p");
+        passwordParagraph.classList.add("entry-note");
 
         if (note.note.includes("\n")) {
           const lines = note.note.split("\n");
-          const formattedNote = lines.join("<br>");
-          passwordParagraph.innerHTML = "Note: " + formattedNote;
+          for (const line of lines) {
+            const lineElement = document.createElement("p");
+            lineElement.textContent = line;
+            passwordParagraph.appendChild(lineElement);
+          }
         } else {
-          passwordParagraph.textContent = "Note: " + note.note;
+          passwordParagraph.textContent = note.note;
         }
 
         entryDiv.appendChild(passwordParagraph);
-        websiteDiv.appendChild(document.createElement("br"));
+
+        // Add delete button
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete-button");
+        deleteButton.textContent = "x";
+        deleteButton.addEventListener("click", function () {
+          // Delete the note from storage and update the UI
+          chrome.storage.local.get(website, function (result) {
+            const notesArray = result[website].filter(
+              (n) => n.title !== note.title
+            );
+            chrome.storage.local.set({ [website]: notesArray }, function () {
+              entryDiv.remove();
+            });
+          });
+        });
+
+        entryDiv.appendChild(deleteButton);
+
         websiteDiv.appendChild(entryDiv);
-        websiteDiv.style.borderBottom = "1px solid";
       }
 
       savedDataDiv.appendChild(websiteDiv);
