@@ -1,3 +1,11 @@
+#savedData {
+  border: 1px solid black;
+  padding: 10px;
+  width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .website-entry {
   background-color: #f8f9fa;
   padding: 15px;
@@ -8,9 +16,9 @@
 
 .website-title {
   margin: 0;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: bold;
-  color: #333;
+  color: rgba(255, 0, 0, 0.5);
 }
 
 .note-entry {
