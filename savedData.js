@@ -52,9 +52,17 @@ chrome.storage.local.get(null, function (data) {
             const notesArray = result[website].filter(
               (n) => n.title !== note.title
             );
-            chrome.storage.local.set({ [website]: notesArray }, function () {
-              entryDiv.remove();
-            });
+
+            if (notesArray.length === 0) {
+              // Delete the key from storage if 'notesArray' is empty
+              chrome.storage.local.remove(website, function () {
+                entryDiv.remove();
+              });
+            } else {
+              chrome.storage.local.set({ [website]: notesArray }, function () {
+                entryDiv.remove();
+              });
+            }
           });
         });
 

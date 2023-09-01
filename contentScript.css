@@ -1,40 +1,82 @@
-.popup-modal {
+/* popup.css */
+
+/* Popup container styles */
+.popup-container {
   position: fixed;
-  top: 2%;
+  top: 5%;
   right: 2%;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-  width: auto;
+  padding: 35px 10px;
+  background-color: transparent;
+  border-radius: 10px;
+  z-index: 99;
+  width: 300px;
+  max-width: 80%;
+  height: 80vh;
+  overflow-y: auto;
+  opacity: 1; /* Start with full opacity */
+  transition: right 0.3s ease, opacity 0.3s ease; /* Add transition */
 }
 
+/* Close icon styles */
 .close-icon {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
-  font-size: 24px;
-  color: red;
+  font-size: 20px;
+  color: #dc3545;
+  z-index: 9999;
 }
 
-.popup-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 15px;
+/* Card styles */
+.card {
+  position: relative;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
 }
 
-.popup-content p {
+.card.slide-in {
+  animation: slideIn 0.3s ease; /* Apply slide-in animation to each card */
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card p {
   margin: 0;
-  color: black;
+  color: #666;
   line-height: 1.5;
-  font-size: 18px;
-  font-weight: bold;
 }
 
-.popup-content p:last-child {
-  font-weight: normal;
+/* Delete button styles */
+.delete-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%); /* Start off-screen to the right */
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

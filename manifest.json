@@ -7,13 +7,15 @@
     "service_worker": "background.js"
   },
   "icons": {
-    "128": "logo.png"
+    "128": "notepad-96.png",
+    "96": "notepad-96.png",
+    "48": "notepad-48.png"
   },
-  "author": "IM",
+  "author": "Tejendra Singh Rajawat",
   "action": {
     "default_popup": "index.html",
     "default_title": "Keep Notes",
-    "default_icon": "logo.png"
+    "default_icon": "notepad-96.png"
   },
   "web_accessible_resources": [
     {
@@ -24,7 +26,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["contentScript.js"]
+      "js": ["contentScript.js"],
+      "css": ["contentScript.css"]
     }
   ],
   "manifest_version": 3
